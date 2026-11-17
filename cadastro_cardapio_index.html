@@ -1,0 +1,4164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Cardápio Escolar</title>
+
+<style>
+
+/* =========================================
+   BASE
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef4ff,
+            #dce8ff
+        );
+
+    color:#222;
+
+}
+
+.tela{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+}
+
+.card{
+
+    width:100%;
+
+    max-width:470px;
+
+    background:white;
+
+    padding:35px 28px;
+
+    border-radius:25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.12);
+
+    text-align:center;
+
+    animation:aparecer .35s ease;
+
+}
+
+.logo{
+
+    width:80px;
+    height:80px;
+
+    margin:0 auto 18px;
+
+    border-radius:50%;
+
+    background:#3b72e8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:38px;
+
+}
+
+h1{
+
+    font-size:28px;
+
+    margin-bottom:10px;
+
+}
+
+.subtitulo{
+
+    color:#777;
+
+    line-height:1.5;
+
+    margin-bottom:28px;
+
+}
+
+.opcoes-login{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.login{
+
+    width:100%;
+
+    padding:20px;
+
+    border:2px solid #e4e8f1;
+
+    border-radius:17px;
+
+    background:#f8faff;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    text-align:left;
+
+}
+
+.login:hover{
+
+    border-color:#3b72e8;
+
+    background:#eef4ff;
+
+    transform:translateY(-2px);
+
+}
+
+.login-icone{
+
+    font-size:32px;
+
+    margin-bottom:8px;
+
+}
+
+.login h3{
+
+    font-size:19px;
+
+    margin-bottom:4px;
+
+}
+
+.login p{
+
+    color:#777;
+
+    font-size:13px;
+
+}
+
+.opcoes-serie{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:13px;
+
+}
+
+.serie{
+
+    width:100%;
+
+    padding:19px;
+
+    border-radius:16px;
+
+    border:2px solid #e2e6ef;
+
+    background:#f8faff;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.2s;
+
+}
+
+.serie:hover{
+
+    border-color:#3b72e8;
+
+    background:#eef4ff;
+
+    transform:translateY(-2px);
+
+}
+
+.serie-icone{
+
+    font-size:27px;
+
+    margin-bottom:5px;
+
+}
+
+.serie h3{
+
+    font-size:18px;
+
+}
+
+.serie p{
+
+    color:#777;
+
+    font-size:13px;
+
+    margin-top:4px;
+
+}
+
+.salas{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+}
+
+.sala{
+
+    padding:17px 10px;
+
+    border-radius:14px;
+
+    border:2px solid #e2e6ef;
+
+    background:#f8faff;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.sala:hover{
+
+    border-color:#3b72e8;
+
+    background:#eef4ff;
+
+    color:#285bc5;
+
+    transform:translateY(-2px);
+
+}
+
+.sala.selecionada{
+
+    background:#3b72e8;
+
+    color:white;
+
+    border-color:#3b72e8;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:16px;
+
+    border:
+        2px solid #e1e1e1;
+
+    border-radius:13px;
+
+    outline:none;
+
+    font-size:16px;
+
+    margin-bottom:15px;
+
+}
+
+input:focus{
+
+    border-color:#3b72e8;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#3b72e8;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+button:hover{
+
+    background:#285bc5;
+
+    transform:translateY(-2px);
+
+}
+
+.voltar{
+
+    margin-top:12px;
+
+    background:#e9e9e9;
+
+    color:#333;
+
+}
+
+.voltar:hover{
+
+    background:#d9d9d9;
+
+}
+
+.confirmacao-usuario{
+
+    padding:20px;
+
+    background:#f4f7ff;
+
+    border:2px solid #e0e6f5;
+
+    border-radius:17px;
+
+    margin-bottom:18px;
+
+}
+
+.confirmacao-icone{
+
+    font-size:40px;
+
+    margin-bottom:10px;
+
+}
+
+.nome-confirmacao{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#3b72e8;
+
+    word-break:break-word;
+
+    margin-bottom:7px;
+
+}
+
+.sala-confirmacao{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+
+/* =========================================
+   ÁREA SUPERIOR
+========================================= */
+
+.info-usuario-topo{
+
+    position:fixed;
+
+    top:18px;
+    left:18px;
+
+    z-index:1000;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 15px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(59,114,232,.15);
+
+    border-radius:16px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.10);
+
+    animation:aparecer .3s ease;
+
+}
+
+.info-usuario-icone{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#eef4ff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:22px;
+
+}
+
+.info-usuario-texto{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2px;
+
+}
+
+.info-usuario-nome{
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    color:#1f2937;
+
+    max-width:180px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+.info-usuario-cargo{
+
+    font-size:12px;
+
+    color:#3b72e8;
+
+    font-weight:bold;
+
+}
+
+.info-usuario-sala{
+
+    font-size:11px;
+
+    color:#777;
+
+}
+
+
+/* =========================================
+   BOTÃO PERFIL
+========================================= */
+
+.botao-perfil{
+
+    position:fixed;
+
+    top:18px;
+    right:18px;
+
+    z-index:1001;
+
+    width:52px;
+    height:52px;
+
+    padding:0;
+
+    border-radius:17px;
+
+    background:white;
+
+    color:#3b72e8;
+
+    border:1px solid rgba(59,114,232,.15);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.10);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+}
+
+.botao-perfil:hover{
+
+    background:#eef4ff;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* =========================================
+   PAINEL PERFIL
+========================================= */
+
+.overlay-perfil{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:2000;
+
+    background:rgba(15,23,42,.35);
+
+    backdrop-filter:blur(5px);
+
+    display:none;
+
+    align-items:flex-start;
+
+    justify-content:flex-end;
+
+    padding:82px 18px 18px;
+
+}
+
+.overlay-perfil.visivel{
+
+    display:flex;
+
+}
+
+.painel-perfil{
+
+    width:100%;
+
+    max-width:330px;
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.20);
+
+    animation:perfilEntrar .25s ease;
+
+}
+
+.perfil-topo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding-bottom:16px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+.perfil-avatar{
+
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    background:#eef4ff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+}
+
+.perfil-nome{
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    word-break:break-word;
+
+}
+
+.perfil-cargo{
+
+    color:#3b72e8;
+
+    font-size:13px;
+
+    margin-top:3px;
+
+    font-weight:bold;
+
+}
+
+.perfil-dados{
+
+    margin-top:16px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.perfil-dado{
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:#f8faff;
+
+}
+
+.perfil-dado strong{
+
+    display:block;
+
+    color:#777;
+
+    font-size:11px;
+
+    margin-bottom:3px;
+
+    text-transform:uppercase;
+
+}
+
+.perfil-dado span{
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    color:#1f2937;
+
+}
+
+.btn-fechar-perfil{
+
+    margin-top:15px;
+
+    background:#eef1f6;
+
+    color:#333;
+
+}
+
+.btn-fechar-perfil:hover{
+
+    background:#e1e5eb;
+
+}
+
+.btn-logout{
+
+    margin-top:10px;
+
+    background:#ef4444;
+
+    color:white;
+
+}
+
+.btn-logout:hover{
+
+    background:#dc2626;
+
+}
+
+
+/* =========================================
+   CARDÁPIO
+========================================= */
+
+.container{
+
+    width:100%;
+
+    max-width:700px;
+
+    margin:70px auto 0;
+
+    background:white;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.1);
+
+    overflow:hidden;
+
+}
+
+header{
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color:white;
+
+    padding:30px 20px;
+
+    text-align:center;
+
+}
+
+header h1{
+
+    font-size:1.8rem;
+
+    margin-bottom:5px;
+
+}
+
+header p{
+
+    opacity:.9;
+
+    font-size:1rem;
+
+}
+
+.content{
+
+    padding:25px;
+
+}
+
+.pergunta{
+
+    font-size:1.2rem;
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+
+    color:#1f2937;
+
+}
+
+
+/* =========================================
+   BOTÕES SIM / NÃO
+========================================= */
+
+.botoes{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:20px;
+
+    margin-bottom:30px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn-sim{
+
+    background:#22c55e;
+
+    color:white;
+
+}
+
+.btn-sim:hover{
+
+    background:#16a34a;
+
+}
+
+.btn-nao{
+
+    background:#f97316;
+
+    color:white;
+
+}
+
+.btn-nao:hover{
+
+    background:#ea580c;
+
+}
+
+
+/* =========================================
+   SEÇÕES
+========================================= */
+
+.secao{
+
+    margin-top:30px;
+
+    display:none;
+
+}
+
+.secao.visivel{
+
+    display:block;
+
+}
+
+h2{
+
+    font-size:1.3rem;
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+    border-bottom:2px solid #e5e7eb;
+
+    padding-bottom:8px;
+
+}
+
+.opcao{
+
+    padding:12px;
+
+    margin:8px 0;
+
+    background:#f9fafb;
+
+    border-radius:8px;
+
+    border-left:4px solid #2563eb;
+
+    transition:background .2s;
+
+}
+
+
+/* =========================================
+   ITENS DE SALGADOS E BEBIDAS
+========================================= */
+
+.item-salgado,
+.item-bebida{
+
+    cursor:pointer;
+
+}
+
+.item-salgado:hover,
+.item-bebida:hover{
+
+    background:#eff6ff;
+
+}
+
+.item-salgado.selecionada,
+.item-bebida.selecionada{
+
+    background:#dbeafe;
+
+    border-left-color:#1d4ed8;
+
+}
+
+
+/* =========================================
+   CARDÁPIO DA MERENDA
+========================================= */
+
+/*
+   IMPORTANTE:
+   Os itens da merenda não têm cursor:pointer
+   e não possuem onclick.
+*/
+
+.cardapio-merenda-item{
+
+    padding:14px;
+
+    margin:8px 0;
+
+    background:#f9fafb;
+
+    border-radius:8px;
+
+    border-left:4px solid #22c55e;
+
+    cursor:default;
+
+    user-select:none;
+
+}
+
+.cardapio-merenda-item:hover{
+
+    background:#f9fafb;
+
+}
+
+
+/* =========================================
+   QUANTIDADE
+========================================= */
+
+.quantidade{
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    margin-top:8px;
+
+}
+
+.opcao.selecionada .quantidade{
+
+    display:flex;
+
+}
+
+.quantidade button{
+
+    width:35px;
+
+    padding:7px;
+
+    font-size:16px;
+
+}
+
+.quantidade span{
+
+    min-width:30px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================================
+   RESUMO
+========================================= */
+
+.resumo{
+
+    margin-top:30px;
+
+    padding:18px;
+
+    background:#f0fdf4;
+
+    border-radius:10px;
+
+    border:2px solid #86efac;
+
+    display:none;
+
+    text-align:left;
+
+}
+
+.resumo.visivel{
+
+    display:block;
+
+}
+
+.grupo-resumo{
+
+    padding:12px;
+
+    background:white;
+
+    border-radius:8px;
+
+    margin-top:10px;
+
+}
+
+.grupo-resumo h4{
+
+    margin-bottom:8px;
+
+    color:#2563eb;
+
+}
+
+.grupo-resumo p{
+
+    line-height:1.6;
+
+}
+
+.btn-enviar{
+
+    width:100%;
+
+    margin-top:20px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:1.1rem;
+
+    padding:14px;
+
+}
+
+.btn-enviar:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+/* =========================================
+   NÃO VOU COMER
+========================================= */
+
+.secao-nada{
+
+    margin-top:30px;
+
+    padding-top:20px;
+
+    border-top:2px solid #e5e7eb;
+
+}
+
+.nada-opcao{
+
+    padding:15px;
+
+    background:#fff7ed;
+
+    border:2px solid #fed7aa;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+}
+
+.nada-opcao:hover{
+
+    background:#ffedd5;
+
+}
+
+.nada-opcao.selecionada{
+
+    background:#ffedd5;
+
+    border-color:#f97316;
+
+}
+
+.escolha-nada{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    background:#fff7ed;
+
+    border:2px solid #fed7aa;
+
+    border-radius:10px;
+
+    display:none;
+
+    text-align:center;
+
+}
+
+.escolha-nada.visivel{
+
+    display:block;
+
+}
+
+.escolha-nada h3{
+
+    margin-bottom:8px;
+
+}
+
+.escolha-nada p{
+
+    margin-bottom:15px;
+
+    font-weight:bold;
+
+}
+
+.btn-nada{
+
+    background:#f97316;
+
+}
+
+.btn-nada:hover{
+
+    background:#ea580c;
+
+}
+
+
+/* =========================================
+   BLOQUEADO
+========================================= */
+
+.bloqueado{
+
+    opacity:.55;
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================
+   ANIMAÇÕES
+========================================= */
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes perfilEntrar{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-10px) scale(.97);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media(max-width:600px){
+
+    .info-usuario-topo{
+
+        top:10px;
+
+        left:10px;
+
+        padding:8px 11px;
+
+        border-radius:14px;
+
+    }
+
+    .info-usuario-icone{
+
+        width:38px;
+        height:38px;
+
+        font-size:19px;
+
+    }
+
+    .info-usuario-nome{
+
+        max-width:130px;
+
+    }
+
+    .botao-perfil{
+
+        top:10px;
+        right:10px;
+
+        width:46px;
+        height:46px;
+
+        border-radius:14px;
+
+        font-size:22px;
+
+    }
+
+    .container{
+
+        margin-top:65px;
+
+    }
+
+}
+
+@media(max-width:400px){
+
+    .card{
+
+        padding:30px 20px;
+
+    }
+
+    .salas{
+
+        gap:8px;
+
+    }
+
+    .sala{
+
+        padding:15px 5px;
+
+        font-size:15px;
+
+    }
+
+    .content{
+
+        padding:20px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     INFORMAÇÕES DO USUÁRIO
+================================================== -->
+
+<div
+    id="infoUsuarioTopo"
+    class="info-usuario-topo"
+    style="display:none"
+>
+
+<div
+    id="iconeUsuarioTopo"
+    class="info-usuario-icone"
+>
+🎓
+</div>
+
+<div class="info-usuario-texto">
+
+<div
+    id="nomeUsuarioTopo"
+    class="info-usuario-nome"
+>
+Aluno
+</div>
+
+<div
+    id="cargoUsuarioTopo"
+    class="info-usuario-cargo"
+>
+Aluno
+</div>
+
+<div
+    id="salaUsuarioTopo"
+    class="info-usuario-sala"
+>
+Sala: -
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     BOTÃO PERFIL
+================================================== -->
+
+<button
+    id="botaoPerfil"
+    class="botao-perfil"
+    style="display:none"
+    onclick="abrirPerfil()"
+    aria-label="Abrir perfil"
+>
+👤
+</button>
+
+
+<!-- ==================================================
+     PAINEL PERFIL
+================================================== -->
+
+<div
+    id="overlayPerfil"
+    class="overlay-perfil"
+    onclick="fecharPerfilFora(event)"
+>
+
+<div class="painel-perfil">
+
+<div class="perfil-topo">
+
+<div
+    id="perfilAvatar"
+    class="perfil-avatar"
+>
+🎓
+</div>
+
+<div>
+
+<div
+    id="perfilNome"
+    class="perfil-nome"
+>
+Aluno
+</div>
+
+<div
+    id="perfilCargo"
+    class="perfil-cargo"
+>
+Aluno
+</div>
+
+</div>
+
+</div>
+
+
+<div class="perfil-dados">
+
+<div class="perfil-dado">
+
+<strong>
+👤 Nome
+</strong>
+
+<span id="perfilNomeDado">
+-
+</span>
+
+</div>
+
+
+<div class="perfil-dado">
+
+<strong>
+💼 Tipo de acesso
+</strong>
+
+<span id="perfilCargoDado">
+-
+</span>
+
+</div>
+
+
+<div
+    id="perfilSalaDadoContainer"
+    class="perfil-dado"
+>
+
+<strong>
+🏫 Sala
+</strong>
+
+<span id="perfilSalaDado">
+-
+</span>
+
+</div>
+
+</div>
+
+
+<button
+    class="btn-fechar-perfil"
+    onclick="fecharPerfil()"
+>
+✕ Fechar
+</button>
+
+
+<button
+    class="btn-logout"
+    onclick="fazerLogout()"
+>
+🚪 Sair da conta
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     TELA INICIAL
+================================================== -->
+
+<section
+    id="telaInicial"
+    class="tela"
+>
+
+<div class="card">
+
+<div class="logo">
+🏫
+</div>
+
+<h1>
+Cardápio Escolar
+</h1>
+
+<p class="subtitulo">
+Como deseja acessar o sistema?
+</p>
+
+<div class="opcoes-login">
+
+
+<div
+    class="login"
+    onclick="entrarProfessor()"
+>
+
+<div class="login-icone">
+👨‍🏫
+</div>
+
+<h3>
+Entrar como Professor
+</h3>
+
+<p>
+Acesso destinado aos professores.
+</p>
+
+</div>
+
+
+<div
+    class="login"
+    onclick="abrirSeries()"
+>
+
+<div class="login-icone">
+🏫
+</div>
+
+<h3>
+Entrar como Sala
+</h3>
+
+<p>
+Acesse utilizando sua sala.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     LOGIN PROFESSOR
+================================================== -->
+
+<section
+    id="telaProfessorCodigo"
+    class="tela"
+    style="display:none"
+>
+
+<div class="card">
+
+<div class="logo">
+🔐
+</div>
+
+<h1>
+Acesso do Professor
+</h1>
+
+<p class="subtitulo">
+Digite o código de acesso para continuar.
+</p>
+
+<input
+    type="password"
+    id="codigoProfessor"
+    placeholder="Código de acesso"
+    autocomplete="off"
+>
+
+<button onclick="verificarCodigoProfessor()">
+Continuar
+</button>
+
+<button
+    class="voltar"
+    onclick="voltarInicio()"
+>
+← Voltar
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     NOME PROFESSOR
+================================================== -->
+
+<section
+    id="telaNomeProfessor"
+    class="tela"
+    style="display:none"
+>
+
+<div class="card">
+
+<div class="logo">
+👨‍🏫
+</div>
+
+<h1>
+Identifique-se
+</h1>
+
+<p class="subtitulo">
+Digite seu nome e sobrenome para continuar.
+</p>
+
+<input
+    type="text"
+    id="nomeProfessor"
+    placeholder="Ex.: João Silva"
+    autocomplete="off"
+>
+
+<button onclick="verificarNomeProfessor()">
+Entrar
+</button>
+
+<button
+    class="voltar"
+    onclick="voltarProfessorCodigo()"
+>
+← Voltar
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     SÉRIES
+================================================== -->
+
+<section
+    id="telaSeries"
+    class="tela"
+    style="display:none"
+>
+
+<div class="card">
+
+<div class="logo">
+📚
+</div>
+
+<h1>
+Selecione a Série
+</h1>
+
+<p class="subtitulo">
+Primeiro, escolha a série da sua sala.
+</p>
+
+<div class="opcoes-serie">
+
+<div
+    class="serie"
+    onclick="abrirSalas('1')"
+>
+
+<div class="serie-icone">
+📘
+</div>
+
+<h3>
+1ª Séries
+</h3>
+
+<p>
+1A, 1B e 1C
+</p>
+
+</div>
+
+
+<div
+    class="serie"
+    onclick="abrirSalas('2')"
+>
+
+<div class="serie-icone">
+📗
+</div>
+
+<h3>
+2ª Séries
+</h3>
+
+<p>
+2ªA e 2ªB
+</p>
+
+</div>
+
+
+<div
+    class="serie"
+    onclick="abrirSalas('3')"
+>
+
+<div class="serie-icone">
+📕
+</div>
+
+<h3>
+3ª Séries
+</h3>
+
+<p>
+3ªA e 3ªB
+</p>
+
+</div>
+
+</div>
+
+
+<button
+    class="voltar"
+    onclick="voltarInicio()"
+>
+← Voltar
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     SALAS
+================================================== -->
+
+<section
+    id="telaSalas"
+    class="tela"
+    style="display:none"
+>
+
+<div class="card">
+
+<div class="logo">
+🏫
+</div>
+
+<h1>
+Escolha sua Sala
+</h1>
+
+<p
+    id="textoSerie"
+    class="subtitulo"
+>
+Selecione uma sala.
+</p>
+
+<div
+    id="listaSalas"
+    class="salas"
+></div>
+
+<button
+    class="voltar"
+    onclick="voltarSeries()"
+>
+← Voltar
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     NOME ALUNO
+================================================== -->
+
+<section
+    id="telaNome"
+    class="tela"
+    style="display:none"
+>
+
+<div class="card">
+
+<div class="logo">
+👤
+</div>
+
+<h1>
+Identifique-se
+</h1>
+
+<p class="subtitulo">
+Digite seu nome e sobrenome para continuar.
+</p>
+
+<input
+    type="text"
+    id="nomeAluno"
+    placeholder="Ex.: João Silva"
+    autocomplete="off"
+>
+
+<button onclick="verificarNome()">
+Continuar
+</button>
+
+<button
+    class="voltar"
+    onclick="voltarSalas()"
+>
+← Voltar
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     CONFIRMAÇÃO ALUNO
+================================================== -->
+
+<section
+    id="telaConfirmacao"
+    class="tela"
+    style="display:none"
+>
+
+<div class="card">
+
+<div class="logo">
+👤
+</div>
+
+<h1>
+Confirmar acesso
+</h1>
+
+<p class="subtitulo">
+Confira os dados antes de entrar.
+</p>
+
+<div class="confirmacao-usuario">
+
+<div class="confirmacao-icone">
+🎓
+</div>
+
+<div
+    id="nomeConfirmacao"
+    class="nome-confirmacao"
+>
+Nome
+</div>
+
+<div
+    id="salaConfirmacao"
+    class="sala-confirmacao"
+>
+Sala
+</div>
+
+</div>
+
+<button onclick="logarAluno()">
+Entrar
+</button>
+
+<button
+    class="voltar"
+    onclick="voltarNome()"
+>
+← Corrigir nome
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     CARDÁPIO
+================================================== -->
+
+<section
+    id="telaCardapio"
+    class="tela"
+    style="display:none"
+>
+
+<div class="container">
+
+<header>
+
+<h1>
+🍽️ Cardápio Escolar
+</h1>
+
+<p id="subtituloCardapio">
+Faça sua escolha para hoje!
+</p>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- PERGUNTA -->
+
+<p
+    id="perguntaCardapio"
+    class="pergunta"
+>
+Você vai almoçar na escola hoje?
+</p>
+
+
+<!-- =========================================
+     MERENDA ALUNO
+========================================= -->
+
+<div
+    id="cardapioMerenda"
+    class="secao visivel"
+>
+
+<h2>
+🍛 Cardápio da Merenda Escolar
+</h2>
+
+
+<div class="cardapio-merenda-item">
+
+🍚 <strong>Arroz</strong>
+
+</div>
+
+
+<div class="cardapio-merenda-item">
+
+🫘 <strong>Feijão</strong>
+
+</div>
+
+
+<div class="cardapio-merenda-item">
+
+🍗 <strong>Frango em Molho</strong>
+
+</div>
+
+
+<div class="cardapio-merenda-item">
+
+🥗 <strong>Salada</strong>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================
+     BOTÕES SIM / NÃO
+========================================= -->
+
+<div class="botoes">
+
+<button
+    class="btn-sim"
+    onclick="responder('sim')"
+>
+✅ Sim
+</button>
+
+<button
+    class="btn-nao"
+    onclick="responder('nao')"
+>
+❌ Não
+</button>
+
+</div>
+
+
+<!-- =========================================
+     ESCOLHA ALUNO
+========================================= -->
+
+<div
+    id="secaoEscolha"
+    class="secao"
+>
+
+<h2>
+📋 Sua escolha
+</h2>
+
+<div
+    id="escolhaTexto"
+    class="opcao"
+>
+</div>
+
+<button
+    id="btnConfirmarPresenca"
+    class="btn-sim"
+    onclick="confirmarAlmoco()"
+>
+✅ Confirmar presença
+</button>
+
+</div>
+
+
+<!-- =========================================
+     SALGADOS
+========================================= -->
+
+<div
+    id="secaoSalgados"
+    class="secao"
+>
+
+<h2>
+🥪 Escolha seus Salgados
+</h2>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🥩 Coxinha de Carne
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🍗 Coxinha de Frango
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🍕 Risole de Pizza
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🥩 Risole de Carne
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🌾 Quibe
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🥩 Pastelão de Carne
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🥩 Croquete de Carne Seca
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🌶️ Bola de Calabresa
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🧀 Pão de Queijo
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🥪 Bauru de Presunto e Queijo
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🌶️ Bauru de Calabresa
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🍔 Hambúrguer com Queijo
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🌭 Doguinho
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🧀🍔 Hambúrguer de Cheddar
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🥙 Esfiha de Carne
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🌾🧀 Quibe com Queijo
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-salgado"
+onclick="toggleItem(this,'salgado')">
+
+🍗 Risole de Frango com Catupiry
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     BEBIDAS
+========================================= -->
+
+<div
+    id="secaoBebidas"
+    class="secao"
+>
+
+<h2>
+🥤 Escolha suas Bebidas
+</h2>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🥤 Coca-Cola
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🥤 Guaraná Antarctica
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🥤 Pepsi
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🥤 Fanta Laranja
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🥤 Fanta Uva
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🥤 Sprite
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🥤 Kuat
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+💧 Água Mineral
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🧃 Suco de Laranja
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🧃 Suco de Maracujá
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+
+<div class="opcao item-bebida"
+onclick="toggleItem(this,'bebida')">
+
+🥛 Toddynho
+
+<div class="quantidade">
+<button onclick="alterarQuantidade(event,this,-1)">−</button>
+<span>1</span>
+<button onclick="alterarQuantidade(event,this,1)">+</button>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     NÃO VOU COMER
+========================================= -->
+
+<div
+    id="secaoNada"
+    class="secao-nada"
+    style="display:none"
+>
+
+<div
+    id="opcaoNada"
+    class="nada-opcao"
+    onclick="selecionarNada()"
+>
+
+🚫 Não vou comer ou trouxe marmita
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     RESUMO
+========================================= -->
+
+<div
+    id="resumo"
+    class="resumo"
+>
+
+<h3>
+📋 Resumo do Pedido
+</h3>
+
+
+<div
+    id="resumoSalgados"
+    class="grupo-resumo"
+>
+
+<h4>
+🥪 Salgados
+</h4>
+
+<p id="textoSalgados">
+Nenhum escolhido
+</p>
+
+</div>
+
+
+<div
+    id="resumoBebidas"
+    class="grupo-resumo"
+>
+
+<h4>
+🥤 Bebidas
+</h4>
+
+<p id="textoBebidas">
+Nenhuma escolhida
+</p>
+
+</div>
+
+
+<button
+    id="btnEnviarPedido"
+    class="btn-enviar"
+    onclick="enviarPedido()"
+>
+📤 Fazer pedido
+</button>
+
+</div>
+
+
+<!-- =========================================
+     ESCOLHA NADA
+========================================= -->
+
+<div
+    id="escolhaNada"
+    class="escolha-nada"
+>
+
+<h3>
+📋 Sua escolha
+</h3>
+
+<p>
+🚫 Não vou comer ou trouxe marmita
+</p>
+
+<button
+    class="btn-nada"
+    onclick="confirmarNada()"
+>
+📤 Enviar resposta
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<script>
+
+/* =========================================
+   VARIÁVEIS
+========================================= */
+
+let serieSelecionada = "";
+
+let salaSelecionada = "";
+
+let nomeSelecionado = "";
+
+let cargoSelecionado = "Aluno";
+
+let vaiAlmocar = null;
+
+let salgadosEscolhidos = [];
+
+let bebidasEscolhidas = [];
+
+let modoFinalizado = false;
+
+
+/* =========================================
+   CÓDIGO PROFESSOR
+========================================= */
+
+const codigoProfessorCorreto = "Prof@2026";
+
+
+/* =========================================
+   SALAS
+========================================= */
+
+const salas = {
+
+"1":[
+"1A",
+"1B",
+"1C"
+],
+
+"2":[
+"2ªA",
+"2ªB"
+],
+
+"3":[
+"3ªA",
+"3ªB"
+]
+
+};
+
+
+/* =========================================
+   PALAVRAS IMPRÓPRIAS
+========================================= */
+
+const palavrasImproprias = [
+
+"palavra1",
+"palavra2",
+"palavra3"
+
+];
+
+
+/* =========================================
+   MOSTRAR TELA
+========================================= */
+
+function mostrarTela(id){
+
+const telas = [
+
+"telaInicial",
+"telaProfessorCodigo",
+"telaNomeProfessor",
+"telaSeries",
+"telaSalas",
+"telaNome",
+"telaConfirmacao",
+"telaCardapio"
+
+];
+
+telas.forEach(function(tela){
+
+document.getElementById(tela).style.display="none";
+
+});
+
+document.getElementById(id).style.display="flex";
+
+}
+
+
+/* =========================================
+   ENTRAR COMO ALUNO
+========================================= */
+
+function abrirSeries(){
+
+cargoSelecionado="Aluno";
+
+mostrarTela("telaSeries");
+
+}
+
+
+/* =========================================
+   ENTRAR COMO PROFESSOR
+========================================= */
+
+function entrarProfessor(){
+
+cargoSelecionado="Professor";
+
+document.getElementById("codigoProfessor").value="";
+
+mostrarTela("telaProfessorCodigo");
+
+setTimeout(function(){
+
+document
+.getElementById("codigoProfessor")
+.focus();
+
+},100);
+
+}
+
+
+/* =========================================
+   VERIFICAR CÓDIGO PROFESSOR
+========================================= */
+
+function verificarCodigoProfessor(){
+
+const codigo =
+document
+.getElementById("codigoProfessor")
+.value;
+
+if(codigo !== codigoProfessorCorreto){
+
+alert("❌ Código de acesso incorreto.");
+
+document
+.getElementById("codigoProfessor")
+.value="";
+
+document
+.getElementById("codigoProfessor")
+.focus();
+
+return;
+
+}
+
+document
+.getElementById("nomeProfessor")
+.value="";
+
+mostrarTela("telaNomeProfessor");
+
+setTimeout(function(){
+
+document
+.getElementById("nomeProfessor")
+.focus();
+
+},100);
+
+}
+
+
+/* =========================================
+   NOME PROFESSOR
+========================================= */
+
+function verificarNomeProfessor(){
+
+const campo =
+document.getElementById("nomeProfessor");
+
+const nome =
+campo.value.trim();
+
+if(nome===""){
+
+alert("Digite seu nome e sobrenome.");
+
+campo.focus();
+
+return;
+
+}
+
+const partes =
+nome.split(/\s+/);
+
+if(partes.length<2){
+
+alert("Digite seu nome e sobrenome.");
+
+campo.focus();
+
+return;
+
+}
+
+if(nome.length<5){
+
+alert("O nome informado é muito curto.");
+
+campo.focus();
+
+return;
+
+}
+
+const nomeMinusculo =
+nome.toLowerCase();
+
+for(let palavra of palavrasImproprias){
+
+if(nomeMinusculo.includes(palavra)){
+
+alert(
+"⚠️ Esse nome não pode ser utilizado. Por favor, informe um nome apropriado."
+);
+
+campo.value="";
+
+campo.focus();
+
+return;
+
+}
+
+}
+
+nomeSelecionado=nome;
+
+cargoSelecionado="Professor";
+
+atualizarPerfilUsuario();
+
+configurarCardapioProfessor();
+
+mostrarTela("telaCardapio");
+
+}
+
+
+/* =========================================
+   SALAS
+========================================= */
+
+function abrirSalas(serie){
+
+serieSelecionada=serie;
+
+const lista =
+document.getElementById("listaSalas");
+
+lista.innerHTML="";
+
+salas[serie].forEach(function(sala){
+
+const botao =
+document.createElement("div");
+
+botao.className="sala";
+
+botao.textContent=sala;
+
+botao.onclick=function(){
+
+selecionarSala(sala,botao);
+
+};
+
+lista.appendChild(botao);
+
+});
+
+mostrarTela("telaSalas");
+
+}
+
+
+/* =========================================
+   SELECIONAR SALA
+========================================= */
+
+function selecionarSala(sala,elemento){
+
+salaSelecionada=sala;
+
+document
+.querySelectorAll(".sala")
+.forEach(function(item){
+
+item.classList.remove("selecionada");
+
+});
+
+elemento.classList.add("selecionada");
+
+setTimeout(function(){
+
+abrirTelaNome();
+
+},250);
+
+}
+
+
+/* =========================================
+   TELA NOME
+========================================= */
+
+function abrirTelaNome(){
+
+document
+.getElementById("nomeAluno")
+.value="";
+
+mostrarTela("telaNome");
+
+setTimeout(function(){
+
+document
+.getElementById("nomeAluno")
+.focus();
+
+},100);
+
+}
+
+
+/* =========================================
+   VERIFICAR NOME ALUNO
+========================================= */
+
+function verificarNome(){
+
+const campo =
+document.getElementById("nomeAluno");
+
+const nome =
+campo.value.trim();
+
+if(nome===""){
+
+alert("Digite seu nome e sobrenome.");
+
+campo.focus();
+
+return;
+
+}
+
+const partes =
+nome.split(/\s+/);
+
+if(partes.length<2){
+
+alert("Digite seu nome e sobrenome.");
+
+campo.focus();
+
+return;
+
+}
+
+if(nome.length<5){
+
+alert("O nome informado é muito curto.");
+
+campo.focus();
+
+return;
+
+}
+
+const nomeMinusculo =
+nome.toLowerCase();
+
+for(let palavra of palavrasImproprias){
+
+if(nomeMinusculo.includes(palavra)){
+
+alert(
+"⚠️ Esse nome não pode ser utilizado. Por favor, informe um nome apropriado."
+);
+
+campo.value="";
+
+campo.focus();
+
+return;
+
+}
+
+}
+
+nomeSelecionado=nome;
+
+document
+.getElementById("nomeConfirmacao")
+.textContent=nomeSelecionado;
+
+document
+.getElementById("salaConfirmacao")
+.textContent=
+"Sala: "+salaSelecionada;
+
+mostrarTela("telaConfirmacao");
+
+}
+
+
+/* =========================================
+   LOGIN ALUNO
+========================================= */
+
+function logarAluno(){
+
+cargoSelecionado="Aluno";
+
+atualizarPerfilUsuario();
+
+configurarCardapioAluno();
+
+mostrarTela("telaCardapio");
+
+}
+
+
+/* =========================================
+   CONFIGURAR CARDÁPIO ALUNO
+========================================= */
+
+function configurarCardapioAluno(){
+
+document
+.getElementById("perguntaCardapio")
+.textContent=
+"Você vai almoçar na escola hoje?";
+
+document
+.getElementById("subtituloCardapio")
+.textContent=
+"Confira o cardápio e faça sua escolha!";
+
+document
+.getElementById("cardapioMerenda")
+.style.display="block";
+
+document
+.getElementById("btnConfirmarPresenca")
+.style.display="block";
+
+resetarCardapio();
+
+}
+
+
+/* =========================================
+   CONFIGURAR CARDÁPIO PROFESSOR
+========================================= */
+
+function configurarCardapioProfessor(){
+
+document
+.getElementById("perguntaCardapio")
+.textContent=
+"Você vai pedir salgado hoje?";
+
+document
+.getElementById("subtituloCardapio")
+.textContent=
+"Escolha seus salgados para hoje!";
+
+document
+.getElementById("cardapioMerenda")
+.style.display="none";
+
+document
+.getElementById("btnConfirmarPresenca")
+.style.display="none";
+
+resetarCardapio();
+
+}
+
+
+/* =========================================
+   RESETAR CARDÁPIO
+========================================= */
+
+function resetarCardapio(){
+
+vaiAlmocar=null;
+
+salgadosEscolhidos=[];
+
+bebidasEscolhidas=[];
+
+modoFinalizado=false;
+
+
+/* REMOVE BLOQUEIOS */
+
+document
+.querySelectorAll(
+".item-salgado,.item-bebida,#opcaoNada,.btn-sim,.btn-nao"
+)
+.forEach(function(el){
+
+el.classList.remove("bloqueado");
+
+});
+
+
+/* RESET ITEMS */
+
+document
+.querySelectorAll(
+".item-salgado,.item-bebida"
+)
+.forEach(function(el){
+
+el.classList.remove("selecionada");
+
+const quantidade =
+el.querySelector(".quantidade span");
+
+if(quantidade){
+
+quantidade.textContent="1";
+
+}
+
+});
+
+
+/* ESCONDE TUDO */
+
+document
+.getElementById("secaoEscolha")
+.classList.remove("visivel");
+
+document
+.getElementById("secaoSalgados")
+.classList.remove("visivel");
+
+document
+.getElementById("secaoBebidas")
+.classList.remove("visivel");
+
+document
+.getElementById("resumo")
+.classList.remove("visivel");
+
+document
+.getElementById("escolhaNada")
+.classList.remove("visivel");
+
+document
+.getElementById("opcaoNada")
+.classList.remove("selecionada");
+
+
+document
+.getElementById("secaoNada")
+.style.display="none";
+
+
+/* ALUNO COMEÇA COM MERENDA VISÍVEL */
+
+if(cargoSelecionado==="Aluno"){
+
+document
+.getElementById("cardapioMerenda")
+.style.display="block";
+
+}else{
+
+document
+.getElementById("cardapioMerenda")
+.style.display="none";
+
+}
+
+}
+
+
+/* =========================================
+   PERFIL
+========================================= */
+
+function atualizarPerfilUsuario(){
+
+const infoTopo =
+document.getElementById(
+"infoUsuarioTopo"
+);
+
+const botaoPerfil =
+document.getElementById(
+"botaoPerfil"
+);
+
+const icone =
+document.getElementById(
+"iconeUsuarioTopo"
+);
+
+const nomeTopo =
+document.getElementById(
+"nomeUsuarioTopo"
+);
+
+const cargoTopo =
+document.getElementById(
+"cargoUsuarioTopo"
+);
+
+const salaTopo =
+document.getElementById(
+"salaUsuarioTopo"
+);
+
+
+infoTopo.style.display="flex";
+
+botaoPerfil.style.display="flex";
+
+
+nomeTopo.textContent =
+nomeSelecionado || "Usuário";
+
+
+cargoTopo.textContent =
+cargoSelecionado;
+
+
+if(cargoSelecionado==="Professor"){
+
+icone.textContent="👨‍🏫";
+
+salaTopo.style.display="none";
+
+}else{
+
+icone.textContent="🎓";
+
+salaTopo.style.display="block";
+
+salaTopo.textContent=
+"Sala: "+salaSelecionada;
+
+}
+
+
+/* PAINEL */
+
+document
+.getElementById("perfilNome")
+.textContent=
+nomeSelecionado || "Usuário";
+
+document
+.getElementById("perfilCargo")
+.textContent=
+cargoSelecionado;
+
+document
+.getElementById("perfilAvatar")
+.textContent=
+cargoSelecionado==="Professor"
+?"👨‍🏫"
+:"🎓";
+
+document
+.getElementById("perfilNomeDado")
+.textContent=
+nomeSelecionado || "-";
+
+document
+.getElementById("perfilCargoDado")
+.textContent=
+cargoSelecionado;
+
+
+/* SALA */
+
+const salaContainer =
+document.getElementById(
+"perfilSalaDadoContainer"
+);
+
+if(cargoSelecionado==="Professor"){
+
+salaContainer.style.display="none";
+
+}else{
+
+salaContainer.style.display="block";
+
+document
+.getElementById("perfilSalaDado")
+.textContent=
+salaSelecionada;
+
+}
+
+}
+
+
+/* =========================================
+   ABRIR PERFIL
+========================================= */
+
+function abrirPerfil(){
+
+document
+.getElementById("overlayPerfil")
+.classList.add("visivel");
+
+}
+
+
+/* =========================================
+   FECHAR PERFIL
+========================================= */
+
+function fecharPerfil(){
+
+document
+.getElementById("overlayPerfil")
+.classList.remove("visivel");
+
+}
+
+
+function fecharPerfilFora(event){
+
+if(
+event.target===
+document.getElementById(
+"overlayPerfil"
+)
+){
+
+fecharPerfil();
+
+}
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function fazerLogout(){
+
+const confirmar =
+confirm(
+"Tem certeza que deseja sair da conta?"
+);
+
+if(!confirmar)return;
+
+
+fecharPerfil();
+
+
+serieSelecionada="";
+
+salaSelecionada="";
+
+nomeSelecionado="";
+
+cargoSelecionado="Aluno";
+
+
+vaiAlmocar=null;
+
+salgadosEscolhidos=[];
+
+bebidasEscolhidas=[];
+
+modoFinalizado=false;
+
+
+document
+.getElementById(
+"infoUsuarioTopo"
+)
+.style.display="none";
+
+
+document
+.getElementById(
+"botaoPerfil"
+)
+.style.display="none";
+
+
+document
+.getElementById(
+"codigoProfessor"
+)
+.value="";
+
+
+document
+.getElementById(
+"nomeProfessor"
+)
+.value="";
+
+
+document
+.getElementById(
+"nomeAluno"
+)
+.value="";
+
+
+resetarCardapio();
+
+
+mostrarTela("telaInicial");
+
+}
+
+
+/* =========================================
+   RESPONDER SIM / NÃO
+========================================= */
+
+function responder(resposta){
+
+if(modoFinalizado)return;
+
+
+/* LIMPA ESCOLHAS */
+
+salgadosEscolhidos=[];
+
+bebidasEscolhidas=[];
+
+
+/* REMOVE SELEÇÕES */
+
+document
+.querySelectorAll(
+".item-salgado,.item-bebida"
+)
+.forEach(function(el){
+
+el.classList.remove("selecionada");
+
+el.querySelector(
+".quantidade span"
+).textContent="1";
+
+});
+
+
+/* LIMPA RESUMOS */
+
+document
+.getElementById("resumo")
+.classList.remove("visivel");
+
+document
+.getElementById("escolhaNada")
+.classList.remove("visivel");
+
+document
+.getElementById("opcaoNada")
+.classList.remove("selecionada");
+
+
+vaiAlmocar=resposta;
+
+
+/* =========================================
+   PROFESSOR
+========================================= */
+
+if(cargoSelecionado==="Professor"){
+
+document
+.getElementById("secaoNada")
+.style.display="none";
+
+
+if(resposta==="sim"){
+
+document
+.getElementById("secaoSalgados")
+.classList.add("visivel");
+
+document
+.getElementById("secaoBebidas")
+.classList.add("visivel");
+
+return;
+
+}
+
+
+document
+.getElementById("secaoSalgados")
+.classList.remove("visivel");
+
+document
+.getElementById("secaoBebidas")
+.classList.remove("visivel");
+
+document
+.getElementById("resumo")
+.classList.remove("visivel");
+
+document
+.getElementById("secaoNada")
+.style.display="block";
+
+return;
+
+}
+
+
+/* =========================================
+   ALUNO
+========================================= */
+
+if(resposta==="sim"){
+
+/*
+   CORREÇÃO:
+   O cardápio NÃO desaparece.
+   Ele continua visível para o aluno.
+*/
+
+document
+.getElementById("cardapioMerenda")
+.style.display="block";
+
+
+document
+.getElementById("secaoEscolha")
+.classList.add("visivel");
+
+
+document
+.getElementById("escolhaTexto")
+.textContent=
+"🍛 Vou almoçar na escola";
+
+
+document
+.getElementById("secaoSalgados")
+.classList.remove("visivel");
+
+
+document
+.getElementById("secaoBebidas")
+.classList.remove("visivel");
+
+
+document
+.getElementById("secaoNada")
+.style.display="none";
+
+
+return;
+
+}
+
+
+/* =========================================
+   ALUNO NÃO
+========================================= */
+
+document
+.getElementById("cardapioMerenda")
+.style.display="none";
+
+
+document
+.getElementById("secaoEscolha")
+.classList.remove("visivel");
+
+
+document
+.getElementById("secaoSalgados")
+.classList.add("visivel");
+
+
+document
+.getElementById("secaoBebidas")
+.classList.add("visivel");
+
+
+document
+.getElementById("secaoNada")
+.style.display="block";
+
+}
+
+
+/* =========================================
+   SELECIONAR ITEM
+========================================= */
+
+function toggleItem(elemento,tipo){
+
+if(modoFinalizado)return;
+
+
+const lista =
+tipo==="salgado"
+?salgadosEscolhidos
+:bebidasEscolhidas;
+
+
+elemento.classList.toggle(
+"selecionada"
+);
+
+
+const nome =
+elemento.childNodes[0]
+.textContent
+.trim();
+
+
+if(
+elemento.classList.contains(
+"selecionada"
+)
+){
+
+lista.push({
+
+nome:nome,
+
+quantidade:1
+
+});
+
+}else{
+
+const indice =
+lista.findIndex(
+item=>item.nome===nome
+);
+
+if(indice!==-1){
+
+lista.splice(indice,1);
+
+}
+
+elemento
+.querySelector(
+".quantidade span"
+)
+.textContent="1";
+
+}
+
+atualizarResumo();
+
+}
+
+
+/* =========================================
+   QUANTIDADE
+========================================= */
+
+function alterarQuantidade(
+event,
+botao,
+valor
+){
+
+event.stopPropagation();
+
+if(modoFinalizado)return;
+
+
+const elemento =
+botao.closest(".opcao");
+
+
+if(
+!elemento.classList.contains(
+"selecionada"
+)
+)return;
+
+
+const tipo =
+elemento.classList.contains(
+"item-salgado"
+)
+?"salgado"
+:"bebida";
+
+
+const lista =
+tipo==="salgado"
+?salgadosEscolhidos
+:bebidasEscolhidas;
+
+
+const nome =
+elemento.childNodes[0]
+.textContent
+.trim();
+
+
+const item =
+lista.find(
+i=>i.nome===nome
+);
+
+
+if(!item)return;
+
+
+item.quantidade+=valor;
+
+
+if(item.quantidade<1){
+
+item.quantidade=1;
+
+}
+
+
+elemento
+.querySelector(
+".quantidade span"
+)
+.textContent=
+item.quantidade;
+
+
+atualizarResumo();
+
+}
+
+
+/* =========================================
+   RESUMO
+========================================= */
+
+function atualizarResumo(){
+
+if(
+salgadosEscolhidos.length===0 &&
+bebidasEscolhidas.length===0
+){
+
+document
+.getElementById("resumo")
+.classList.remove("visivel");
+
+return;
+
+}
+
+
+let salgadosHTML="";
+
+
+salgadosEscolhidos
+.forEach(function(item){
+
+salgadosHTML+=
+"• "+item.nome+
+" × "+item.quantidade+
+"<br>";
+
+});
+
+
+let bebidasHTML="";
+
+
+bebidasEscolhidas
+.forEach(function(item){
+
+bebidasHTML+=
+"• "+item.nome+
+" × "+item.quantidade+
+"<br>";
+
+});
+
+
+document
+.getElementById("textoSalgados")
+.innerHTML=
+salgadosHTML ||
+"Nenhum escolhido";
+
+
+document
+.getElementById("textoBebidas")
+.innerHTML=
+bebidasHTML ||
+"Nenhuma escolhida";
+
+
+document
+.getElementById("resumo")
+.classList.add("visivel");
+
+}
+
+
+/* =========================================
+   CONFIRMAR ALMOÇO
+========================================= */
+
+function confirmarAlmoco(){
+
+if(modoFinalizado)return;
+
+
+modoFinalizado=true;
+
+
+document
+.getElementById("secaoEscolha")
+.innerHTML=`
+
+<h2>📋 Sua escolha</h2>
+
+<div class="opcao selecionada">
+
+🍛 Vou almoçar na escola
+
+</div>
+
+<button class="btn-sim">
+
+✅ Presença confirmada!
+
+</button>
+
+`;
+
+
+bloquearTudo();
+
+
+alert(
+"Presença confirmada com sucesso! 🍛"
+);
+
+}
+
+
+/* =========================================
+   SELECIONAR NADA
+========================================= */
+
+function selecionarNada(){
+
+if(modoFinalizado)return;
+
+
+document
+.querySelectorAll(
+".item-salgado,.item-bebida"
+)
+.forEach(function(el){
+
+el.classList.remove(
+"selecionada"
+);
+
+el.querySelector(
+".quantidade span"
+).textContent="1";
+
+});
+
+
+salgadosEscolhidos=[];
+
+bebidasEscolhidas=[];
+
+
+document
+.getElementById("resumo")
+.classList.remove("visivel");
+
+
+document
+.getElementById("opcaoNada")
+.classList.toggle(
+"selecionada"
+);
+
+
+if(
+document
+.getElementById("opcaoNada")
+.classList.contains(
+"selecionada"
+)
+){
+
+document
+.getElementById("escolhaNada")
+.classList.add(
+"visivel"
+);
+
+}else{
+
+document
+.getElementById("escolhaNada")
+.classList.remove(
+"visivel"
+);
+
+}
+
+}
+
+
+/* =========================================
+   CONFIRMAR NADA
+========================================= */
+
+function confirmarNada(){
+
+if(modoFinalizado)return;
+
+
+modoFinalizado=true;
+
+
+alert(
+"Resposta enviada com sucesso! 🚫"
+);
+
+
+bloquearTudo();
+
+}
+
+
+/* =========================================
+   FAZER PEDIDO
+========================================= */
+
+function enviarPedido(){
+
+if(modoFinalizado)return;
+
+
+if(
+salgadosEscolhidos.length===0 &&
+bebidasEscolhidas.length===0
+){
+
+alert(
+"Escolha pelo menos um salgado ou uma bebida."
+);
+
+return;
+
+}
+
+
+modoFinalizado=true;
+
+
+alert(
+"Pedido feito com sucesso! 📦"
+);
+
+
+bloquearTudo();
+
+}
+
+
+/* =========================================
+   BLOQUEAR
+========================================= */
+
+function bloquearTudo(){
+
+document
+.querySelectorAll(
+".item-salgado,.item-bebida,#opcaoNada,.btn-sim,.btn-nao"
+)
+.forEach(function(el){
+
+el.classList.add("bloqueado");
+
+});
+
+}
+
+
+/* =========================================
+   VOLTAR
+========================================= */
+
+function voltarInicio(){
+
+serieSelecionada="";
+
+salaSelecionada="";
+
+nomeSelecionado="";
+
+cargoSelecionado="Aluno";
+
+mostrarTela("telaInicial");
+
+}
+
+
+function voltarProfessorCodigo(){
+
+document
+.getElementById("nomeProfessor")
+.value="";
+
+mostrarTela(
+"telaProfessorCodigo"
+);
+
+setTimeout(function(){
+
+document
+.getElementById("codigoProfessor")
+.focus();
+
+},100);
+
+}
+
+
+function voltarSeries(){
+
+salaSelecionada="";
+
+mostrarTela("telaSeries");
+
+}
+
+
+function voltarSalas(){
+
+nomeSelecionado="";
+
+mostrarTela("telaSalas");
+
+}
+
+
+function voltarNome(){
+
+mostrarTela("telaNome");
+
+setTimeout(function(){
+
+document
+.getElementById("nomeAluno")
+.focus();
+
+},100);
+
+}
+
+
+/* =========================================
+   ENTER
+========================================= */
+
+document
+.getElementById("nomeAluno")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key==="Enter"){
+
+verificarNome();
+
+}
+
+});
+
+
+document
+.getElementById("nomeProfessor")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key==="Enter"){
+
+verificarNomeProfessor();
+
+}
+
+});
+
+
+document
+.getElementById("codigoProfessor")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key==="Enter"){
+
+verificarCodigoProfessor();
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
